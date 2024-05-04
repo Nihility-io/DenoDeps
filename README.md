@@ -6,7 +6,8 @@ Export a list of your Deno dependencies with author and licensing info.
 
 ## Usage
 ```bash
-deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json
+# A read only API token is required for Github in order to have a higher API quota.
+GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json
 ```
 
 ## Example Output
