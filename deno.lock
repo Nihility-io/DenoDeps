@@ -2,21 +2,21 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "jsr:@std/assert@^0.224.0": "jsr:@std/assert@0.224.0",
-      "jsr:@std/cli@^0.224.0": "jsr:@std/cli@0.224.0",
+      "jsr:@std/assert@^0.225.3": "jsr:@std/assert@0.225.3",
+      "jsr:@std/cli@^0.224.3": "jsr:@std/cli@0.224.3",
       "jsr:@std/semver@^0.224.0": "jsr:@std/semver@0.224.0",
       "npm:cheerio@1.0.0-rc.12": "npm:cheerio@1.0.0-rc.12",
-      "npm:ts-pattern@^5.1.1": "npm:ts-pattern@5.1.1",
-      "npm:zod@^3.23.6": "npm:zod@3.23.6"
+      "npm:ts-pattern@^5.1.2": "npm:ts-pattern@5.1.2",
+      "npm:zod@^3.23.8": "npm:zod@3.23.8"
     },
     "jsr": {
-      "@std/assert@0.224.0": {
-        "integrity": "8643233ec7aec38a940a8264a6e3eed9bfa44e7a71cc6b3c8874213ff401967f"
+      "@std/assert@0.225.3": {
+        "integrity": "b3c2847aecf6955b50644cdb9cf072004ea3d1998dd7579fc0acb99dbb23bd4f"
       },
-      "@std/cli@0.224.0": {
-        "integrity": "2612373d68984637bdad8b9c9dd160e9838ac2a6d463354d537d2897a7cc6d1c",
+      "@std/cli@0.224.3": {
+        "integrity": "54fd879e24b738f6812dcc75bcae1534ba8f014245064ceae1bcfc2996c06d44",
         "dependencies": [
-          "jsr:@std/assert@^0.224.0"
+          "jsr:@std/assert@^0.225.3"
         ]
       },
       "@std/semver@0.224.0": {
@@ -123,12 +123,12 @@
           "entities": "entities@4.5.0"
         }
       },
-      "ts-pattern@5.1.1": {
-        "integrity": "sha512-i+owkHr5RYdQxj8olUgRrqpiWH9x27PuWVfXwDmJ/n/CoF/SAa7WW1i2oUpPDMQpJ4U+bGRUcZkVq7i1m3zFCg==",
+      "ts-pattern@5.1.2": {
+        "integrity": "sha512-u+ElKUIWnqisjpRBhv6Y89yNq7Pmz6xL0v7pTSckrVZ0+5Vf32oh/3jmxWl80rAOGcnbBa7fCyeqNdP4yXzWWg==",
         "dependencies": {}
       },
-      "zod@3.23.6": {
-        "integrity": "sha512-RTHJlZhsRbuA8Hmp/iNL7jnfc4nZishjsanDAfEY1QpDQZCahUp3xDzl+zfweE9BklxMUcgBgS1b7Lvie/ZVwA==",
+      "zod@3.23.8": {
+        "integrity": "sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==",
         "dependencies": {}
       }
     }
@@ -136,11 +136,11 @@
   "remote": {},
   "workspace": {
     "dependencies": [
-      "jsr:@std/cli@^0.224.0",
+      "jsr:@std/cli@^0.224.3",
       "jsr:@std/semver@^0.224.0",
       "npm:cheerio@1.0.0-rc.12",
-      "npm:ts-pattern@^5.1.1",
-      "npm:zod@^3.23.6"
+      "npm:ts-pattern@^5.1.2",
+      "npm:zod@^3.23.8"
     ]
   }
 }
