@@ -1,5 +1,5 @@
 # DenoDeps
-Export a list of your Deno dependencies with author and licensing info.
+Export a list of your Deno dependencies with author and licensing info. Note, only NPM and JSR dependencies are processed and license detection is only supported for Github repositories.
 
 ### Disclaimer
 *__Always check the results manually. Do do not guarantee that the results of the dependency analysis are correct.__*

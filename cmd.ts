@@ -1,6 +1,6 @@
 import { parseArgs } from "@std/cli"
 import { getDependencies } from "./parse.ts"
-import { getDenolandInfo, getGithubInfo, getJSRInfo, getNpmInfo } from "./sources/index.ts"
+import { getGithubInfo, getJSRInfo, getNpmInfo } from "./sources/index.ts"
 
 export interface Dependency {
 	registry: "npm" | "jsr" | "deno"
@@ -26,9 +26,7 @@ for (const d of dependencies) {
 				case "npm":
 					return getNpmInfo(d.name, d.version)
 				case "jsr":
-					return getJSRInfo(d.name) ?? ""
-				case "deno":
-					return getDenolandInfo(d.name)
+					return getJSRInfo(d.name)
 			}
 		})()
 

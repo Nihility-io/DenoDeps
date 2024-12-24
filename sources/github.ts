@@ -1,6 +1,8 @@
 import z from "zod"
 import { SourceInfo } from "./common.ts"
 
+const githubToken = Deno.env.get("GITHUB_TOKEN")
+
 const githubReg = /https:\/\/github.com\/([^\/]*)\/([^\/]*)(\.git)?/
 
 const fileModel = z.object({
@@ -8,15 +10,11 @@ const fileModel = z.object({
 	download_url: z.string().nullable(),
 })
 
-const userModel = z.object({
-	name: z.string().nullable(),
-}).transform((x) => x.name ?? undefined)
+const userModel = z.object({ name: z.string().nullable() })
+	.transform((x) => x.name ?? undefined)
 
-const repositoryModel = z.object({
-	license: z.object({ name: z.string().nullable() }).nullable(),
-}).transform((x) => x.license?.name)
-
-const githubToken = Deno.env.get("GITHUB_TOKEN")
+const repositoryModel = z.object({ license: z.object({ name: z.string().nullable() }).nullable() })
+	.transform((x) => x.license?.name)
 
 const githubApi = (req: string): Promise<unknown> =>
 	fetch(`https://api.github.com${req}`, {

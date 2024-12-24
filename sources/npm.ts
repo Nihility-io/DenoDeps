@@ -2,7 +2,7 @@ import z from "zod"
 import { replacePrefix, trimPrefix, trimSuffix, unique } from "../helpers.ts"
 import { SourceInfo } from "./common.ts"
 
-const RepositoryModel = z.object({ url: z.string() })
+const repositoryModel = z.object({ url: z.string() })
 	.transform((x): string => {
 		let repo = x.url ?? ""
 		repo = trimPrefix(repo, "git+")
@@ -12,17 +12,16 @@ const RepositoryModel = z.object({ url: z.string() })
 		return repo
 	})
 
-const UserModel = z.object({ name: z.string() })
+const userModel = z.object({ name: z.string() })
 	.transform((x) => x.name)
 
-const PackageModel = z.object({
+const packageModel = z.object({
 	license: z.string().nullable(),
-	repository: RepositoryModel.nullable(),
-	_npmUser: UserModel.nullable(),
-	maintainers: UserModel.array().nullable(),
+	repository: repositoryModel.nullable(),
+	_npmUser: userModel.nullable(),
+	maintainers: userModel.array().nullable(),
 }).transform((x): SourceInfo => {
 	const repo = x.repository ?? ""
-
 	return {
 		license: x.license ?? undefined,
 		repository: repo.startsWith("https://github.com") ? repo : undefined,
@@ -38,4 +37,4 @@ const PackageModel = z.object({
 export const getNpmInfo = (pkg: string, version: string): Promise<SourceInfo> =>
 	fetch(`https://registry.npmjs.com/${pkg}/${version}`)
 		.then((x) => x.json())
-		.then((x) => PackageModel.parse(x))
+		.then(packageModel.parse)
