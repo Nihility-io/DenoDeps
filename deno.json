@@ -1,6 +1,6 @@
 {
 	"name": "@nihility-io/deno-deps",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"exports": "./cmd.ts",
 	"lock": true,
 	"lint": {
@@ -20,8 +20,8 @@
 		"proseWrap": "preserve"
 	},
 	"imports": {
-		"@std/cli": "jsr:@std/cli@^1.0.9",
-		"@std/semver": "jsr:@std/semver@^1.0.3",
-		"zod": "npm:zod@^3.24.1"
+		"@std/cli": "jsr:@std/cli@^1.0.15",
+		"@std/semver": "jsr:@std/semver@^1.0.4",
+		"zod": "npm:zod@^3.24.2"
 	}
 }
