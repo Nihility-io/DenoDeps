@@ -24,17 +24,5 @@
 		"@std/toml": "jsr:@std/toml@^1.0.5",
 		"@std/yaml": "jsr:@std/yaml@^1.0.6",
 		"zod": "npm:zod@^3.24.3"
-	},
-	"denoDeps": {
-		"entrypoint": "cmd.ts",
-		"output": "out.toml",
-		"dependencies": [{
-			"name": "heroicons",
-			"repository": "https://github.com/tailwindlabs/heroicons",
-			"version": "2.2.0",
-			"authors": ["Tailwind Labs, Inc."],
-			"license": "MIT License",
-			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
-		}]
 	}
 }
