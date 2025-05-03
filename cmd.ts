@@ -5,6 +5,7 @@ import { getConfig } from "./config.ts"
 import { trimPrefix } from "./helpers.ts"
 import { getDependencies } from "./parse.ts"
 import { getGithubInfo, getJSRInfo, getNpmInfo } from "./sources/mod.ts"
+import { Dependency } from "./types.ts"
 
 const cfg = await getConfig()
 
@@ -12,6 +13,10 @@ const dependencies = [...cfg.dependencies, ...getDependencies(cfg.entrypoint)]
 	.toSorted((a, b) => trimPrefix(a.name, "@") < trimPrefix(b.name, "@") ? -1 : 1)
 
 for (const d of dependencies) {
+	if (cfg.excludeDependencies.some((r) => r.test(d.name))) {
+		continue
+	}
+
 	try {
 		const info = await (() => {
 			switch (d.registry) {
@@ -40,6 +45,13 @@ for (const d of dependencies) {
 		d.licenseFile = info.licenseFile ?? d.licenseFile
 	} catch {
 		console.log(`[ERROR] ${d.name}: Failed to get data from Github`)
+	}
+
+	// Remove undefined from values since YAML can't handle them
+	for (const k of Object.keys(d) as (keyof Dependency)[]) {
+		if (d[k] === undefined) {
+			delete d[k]
+		}
 	}
 
 	console.log(`[OKAY] ${d.name}`)

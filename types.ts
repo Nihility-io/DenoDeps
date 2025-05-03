@@ -15,6 +15,7 @@ export interface DenoDepsConfig {
 	entrypoint?: string
 	output?: string
 	dependencies?: Dependency[]
+	excludeDependencies?: string[]
 }
 
 export interface JsonConfig extends Record<string, unknown> {
@@ -25,4 +26,5 @@ export interface Config {
 	entrypoint: string
 	output: string
 	dependencies: Dependency[]
+	excludeDependencies: RegExp[]
 }

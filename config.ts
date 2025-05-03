@@ -13,6 +13,7 @@ export const getConfig = async (): Promise<Config> => {
 	})
 
 	let dependencies: Dependency[] = []
+	let excludeDependencies: RegExp[] = []
 
 	for (const cfgFile of ["deno.json", "jsr.json"]) {
 		if (await fs.exists(cfgFile)) {
@@ -24,9 +25,10 @@ export const getConfig = async (): Promise<Config> => {
 				output = cfg.denoDeps?.output ?? "deps.json"
 			}
 			dependencies = cfg.denoDeps?.dependencies ?? []
+			excludeDependencies = cfg.denoDeps?.excludeDependencies?.map((x) => new RegExp(x)) ?? []
 			break
 		}
 	}
 
-	return { entrypoint, output, dependencies }
+	return { entrypoint, output, dependencies, excludeDependencies }
 }

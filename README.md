@@ -51,6 +51,22 @@ In case you want to specify dependencies which are not picked up by deno-deps e.
 }
 ```
 
+You can also choose to exclude dependencies from the output by using the following config:
+```json
+{
+  "name": "my-module",
+  "version": "1.100",
+  // ...
+  "denoDeps": {
+    // ...
+    "excludeDependencies": [
+      "zod",
+      "@std/*"
+    ]
+  }
+}
+```
+
 
 ## Example Output
 ```json
