@@ -18,12 +18,12 @@ export const getConfig = async (): Promise<Config> => {
 		if (await fs.exists(cfgFile)) {
 			const cfg = JSON.parse(await Deno.readTextFile(cfgFile)) as JsonConfig
 			if (entrypoint === "") {
-				entrypoint = cfg.denoDeps.entrypoint ?? "main.ts"
+				entrypoint = cfg.denoDeps?.entrypoint ?? "main.ts"
 			}
 			if (output === "") {
-				output = cfg.denoDeps.output ?? "deps.json"
+				output = cfg.denoDeps?.output ?? "deps.json"
 			}
-			dependencies = cfg.denoDeps.dependencies ?? []
+			dependencies = cfg.denoDeps?.dependencies ?? []
 			break
 		}
 	}
