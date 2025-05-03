@@ -1,4 +1,5 @@
 import { parseArgs } from "@std/cli"
+import * as JSONC from "@std/jsonc"
 import * as fs from "@std/fs"
 import { Config, Dependency, JsonConfig } from "./types.ts"
 
@@ -15,9 +16,10 @@ export const getConfig = async (): Promise<Config> => {
 	let dependencies: Dependency[] = []
 	let excludeDependencies: RegExp[] = []
 
-	for (const cfgFile of ["deno.json", "jsr.json"]) {
+	for (const cfgFile of ["deno.json", "deno.jsonc", "jsr.json", "jsr.jsonc"]) {
 		if (await fs.exists(cfgFile)) {
-			const cfg = JSON.parse(await Deno.readTextFile(cfgFile)) as JsonConfig
+			const jsonParse = cfgFile.endsWith(".jsonc") ? JSONC.parse : JSON.parse
+			const cfg = jsonParse(await Deno.readTextFile(cfgFile)) as JsonConfig
 			if (entrypoint === "") {
 				entrypoint = cfg.denoDeps?.entrypoint ?? "main.ts"
 			}
