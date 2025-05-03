@@ -12,10 +12,14 @@ const cfg = await getConfig()
 const dependencies = [...cfg.dependencies, ...getDependencies(cfg.entrypoint)]
 	.toSorted((a, b) => trimPrefix(a.name, "@") < trimPrefix(b.name, "@") ? -1 : 1)
 
-for (const d of dependencies) {
+const outputDependencies: Dependency[] = []
+
+for (const input of dependencies) {
 	if (cfg.excludeDependencies.some((r) => r.test(d.name))) {
 		continue
 	}
+
+	const d = { ...input }
 
 	try {
 		const info = await (() => {
@@ -54,6 +58,8 @@ for (const d of dependencies) {
 		}
 	}
 
+	outputDependencies.push(d)
+
 	console.log(`[OKAY] ${d.name}`)
 }
 
@@ -62,11 +68,11 @@ const output = (() => {
 	switch (path.extname(cfg.output)) {
 		case ".yml":
 		case ".yaml":
-			return YAML.stringify(dependencies, { indent: 2, flowLevel: 2 })
+			return YAML.stringify(outputDependencies, { indent: 2, flowLevel: 2 })
 		case ".toml":
-			return TOML.stringify({ dependencies }, {})
+			return TOML.stringify({ dependencies: outputDependencies }, {})
 		default:
-			return JSON.stringify(dependencies, null, 2)
+			return JSON.stringify(outputDependencies, null, 2)
 	}
 })()
 
