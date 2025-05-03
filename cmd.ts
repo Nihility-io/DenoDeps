@@ -1,23 +1,15 @@
-import { parseArgs } from "@std/cli"
+import * as YAML from "@std/yaml"
+import * as TOML from "@std/toml"
+import * as path from "@std/path"
+import { getConfig } from "./config.ts"
+import { trimPrefix } from "./helpers.ts"
 import { getDependencies } from "./parse.ts"
-import { getGithubInfo, getJSRInfo, getNpmInfo } from "./sources/index.ts"
+import { getGithubInfo, getJSRInfo, getNpmInfo } from "./sources/mod.ts"
 
-export interface Dependency {
-	registry: "npm" | "jsr" | "deno"
-	name: string
-	version: string
-	license?: string
-	authors?: string[]
-	repository?: string
-	licenseFile?: string
-}
+const cfg = await getConfig()
 
-const { entrypoint, output } = parseArgs(Deno.args, {
-	string: ["entrypoint", "output"],
-	default: { entrypoint: "main.ts", output: "deps.json" },
-})
-
-const dependencies = getDependencies(entrypoint)
+const dependencies = [...cfg.dependencies, ...getDependencies(cfg.entrypoint)]
+	.toSorted((a, b) => trimPrefix(a.name, "@") < trimPrefix(b.name, "@") ? -1 : 1)
 
 for (const d of dependencies) {
 	try {
@@ -27,12 +19,14 @@ for (const d of dependencies) {
 					return getNpmInfo(d.name, d.version)
 				case "jsr":
 					return getJSRInfo(d.name)
+				default:
+					return d
 			}
 		})()
 
+		d.repository = info.repository
 		d.authors = info.authors
 		d.license = info.license
-		d.repository = info.repository
 		d.licenseFile = info.licenseFile
 	} catch {
 		console.log(`[ERROR] ${d.name}: Failed to get data from registry`)
@@ -40,10 +34,10 @@ for (const d of dependencies) {
 
 	try {
 		const info = await getGithubInfo(d.repository ?? "")
+		d.repository = info.repository ?? d.registry
+		d.authors = info.authors ?? d.authors
 		d.license = info.license ?? d.license
 		d.licenseFile = info.licenseFile ?? d.licenseFile
-		d.authors = info.authors ?? d.authors
-		d.repository = info.repository ?? d.registry
 	} catch {
 		console.log(`[ERROR] ${d.name}: Failed to get data from Github`)
 	}
@@ -51,5 +45,17 @@ for (const d of dependencies) {
 	console.log(`[OKAY] ${d.name}`)
 }
 
-// Write JSON version of the dependency output
-Deno.writeTextFileSync(output, JSON.stringify(dependencies, null, 2))
+// Write JSON or YAML version of the dependency output
+const output = (() => {
+	switch (path.extname(cfg.output)) {
+		case ".yml":
+		case ".yaml":
+			return YAML.stringify(dependencies, { indent: 2, flowLevel: 2 })
+		case ".toml":
+			return TOML.stringify({ dependencies }, {})
+		default:
+			return JSON.stringify(dependencies, null, 2)
+	}
+})()
+
+await Deno.writeTextFile(cfg.output, output)

@@ -1,6 +1,6 @@
 import z from "zod"
 import { replacePrefix, trimPrefix, trimSuffix, unique } from "../helpers.ts"
-import { SourceInfo } from "./common.ts"
+import { SourceInfo } from "../types.ts"
 
 const repositoryModel = z.object({ url: z.string() })
 	.transform((x): string => {

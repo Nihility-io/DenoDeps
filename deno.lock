@@ -1,28 +1,58 @@
 {
-  "version": "4",
+  "version": "5",
   "specifiers": {
-    "jsr:@std/cli@^1.0.15": "1.0.15",
-    "jsr:@std/semver@^1.0.4": "1.0.4",
-    "npm:zod@^3.24.2": "3.24.2"
+    "jsr:@std/cli@^1.0.17": "1.0.17",
+    "jsr:@std/collections@^1.0.11": "1.0.11",
+    "jsr:@std/fs@^1.0.17": "1.0.17",
+    "jsr:@std/path@^1.0.9": "1.0.9",
+    "jsr:@std/semver@^1.0.5": "1.0.5",
+    "jsr:@std/toml@^1.0.5": "1.0.5",
+    "jsr:@std/yaml@^1.0.6": "1.0.6",
+    "npm:zod@^3.24.3": "3.24.3"
   },
   "jsr": {
-    "@std/cli@1.0.15": {
-      "integrity": "e79ba3272ec710ca44d8342a7688e6288b0b88802703f3264184b52893d5e93f"
+    "@std/cli@1.0.17": {
+      "integrity": "e15b9abe629e17be90cc6216327f03a29eae613365f1353837fa749aad29ce7b"
     },
-    "@std/semver@1.0.4": {
-      "integrity": "a62af791917d8fd6c48d6ebbb872f83fad3fc6671ffadbbd39ea229c2d34d175"
+    "@std/collections@1.0.11": {
+      "integrity": "2f62cf9587484b1fff364f6c3e1f83478eea53dbb6faed6ffeda92ddb6b172f0"
+    },
+    "@std/fs@1.0.17": {
+      "integrity": "1c00c632677c1158988ef7a004cb16137f870aafdb8163b9dce86ec652f3952b",
+      "dependencies": [
+        "jsr:@std/path"
+      ]
+    },
+    "@std/path@1.0.9": {
+      "integrity": "260a49f11edd3db93dd38350bf9cd1b4d1366afa98e81b86167b4e3dd750129e"
+    },
+    "@std/semver@1.0.5": {
+      "integrity": "529f79e83705714c105ad0ba55bec0f9da0f24d2f726b6cc1c15e505cc2c0624"
+    },
+    "@std/toml@1.0.5": {
+      "integrity": "08061156e9c5716443a144b6e40a8668738b8b424ad99ab0b6fdf1b6ea4da806",
+      "dependencies": [
+        "jsr:@std/collections"
+      ]
+    },
+    "@std/yaml@1.0.6": {
+      "integrity": "c9a5a914e1d51c46756cb10e356710035cfa905e713c90d3b711413fd3aead27"
     }
   },
   "npm": {
-    "zod@3.24.2": {
-      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
+    "zod@3.24.3": {
+      "integrity": "sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg=="
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/cli@^1.0.15",
-      "jsr:@std/semver@^1.0.4",
-      "npm:zod@^3.24.2"
+      "jsr:@std/cli@^1.0.17",
+      "jsr:@std/fs@^1.0.17",
+      "jsr:@std/path@^1.0.9",
+      "jsr:@std/semver@^1.0.5",
+      "jsr:@std/toml@^1.0.5",
+      "jsr:@std/yaml@^1.0.6",
+      "npm:zod@^3.24.3"
     ]
   }
 }

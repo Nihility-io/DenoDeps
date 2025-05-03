@@ -1,4 +1,5 @@
-import { newerVersion, trimPrefix } from "./helpers.ts"
+import { Dependency } from "./types.ts"
+import { newerVersion } from "./helpers.ts"
 import { z } from "zod"
 
 const infoJson = z.object({
@@ -23,16 +24,6 @@ const infoJson = z.object({
 		),
 }).transform((x) => [...x.packages, ...x.npmPackages])
 
-export interface Dependency {
-	registry: "npm" | "jsr"
-	name: string
-	version: string
-	license?: string
-	authors?: string[]
-	repository?: string
-	licenseFile?: string
-}
-
 /**
  * Uses `deno info` in order to find all dependencies
  * @param entrypoint Entrypoint script (e.g. main.ts)
@@ -52,5 +43,5 @@ export const getDependencies = (entrypoint: string): Dependency[] => {
 		}
 	}
 
-	return Object.values(deps).toSorted((a, b) => trimPrefix(a.name, "@") < trimPrefix(b.name, "@") ? -1 : 1)
+	return Object.values(deps)
 }

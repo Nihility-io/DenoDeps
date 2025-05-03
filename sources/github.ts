@@ -1,5 +1,5 @@
 import z from "zod"
-import { SourceInfo } from "./common.ts"
+import { SourceInfo } from "../types.ts"
 
 const githubToken = Deno.env.get("GITHUB_TOKEN")
 

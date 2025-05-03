@@ -1,4 +1,4 @@
-import { SourceInfo } from "./common.ts"
+import { SourceInfo } from "../types.ts"
 import z from "zod"
 
 const packageModel = z.object({

@@ -5,10 +5,52 @@ Export a list of your Deno dependencies with author and licensing info. Note, on
 *__Always check the results manually. Do do not guarantee that the results of the dependency analysis are correct.__*
 
 ## Usage
+Support output formats are: .json, .yml, .yaml, .toml.
+
+You can run deno-deps using command line options
 ```bash
 # A read only API token is required for Github in order to have a higher API quota.
 GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json
 ```
+or you can configuration your `deno.json` as follows:
+```json
+{
+  "name": "my-module",
+  "version": "1.100",
+  // ...
+  "denoDeps": {
+    "entrypoint": "main.ts",
+    "output": "deps.json"
+  }
+}
+```
+
+```bash
+# A read only API token is required for Github in order to have a higher API quota.
+GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps
+```
+
+In case you want to specify dependencies which are not picked up by deno-deps e.g. a font or icon library, you can add them manually via your `deno.json` as follows:
+```json
+{
+  "name": "my-module",
+  "version": "1.100",
+  // ...
+  "denoDeps": {
+    "entrypoint": "main.ts",
+    "output": "deps.json",
+    "dependencies": [{
+      "name": "heroicons",
+      "repository": "https://github.com/tailwindlabs/heroicons",
+      "version": "2.2.0",
+      "authors": ["Tailwind Labs, Inc."],
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+    }]
+  }
+}
+```
+
 
 ## Example Output
 ```json

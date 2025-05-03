@@ -1,14 +1,11 @@
 {
 	"name": "@nihility-io/deno-deps",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"exports": "./cmd.ts",
 	"lock": true,
 	"lint": {
 		"rules": {
-			"tags": [
-				"fresh",
-				"recommended"
-			]
+			"tags": ["recommended"]
 		}
 	},
 	"fmt": {
@@ -20,8 +17,24 @@
 		"proseWrap": "preserve"
 	},
 	"imports": {
-		"@std/cli": "jsr:@std/cli@^1.0.15",
-		"@std/semver": "jsr:@std/semver@^1.0.4",
-		"zod": "npm:zod@^3.24.2"
+		"@std/cli": "jsr:@std/cli@^1.0.17",
+		"@std/fs": "jsr:@std/fs@^1.0.17",
+		"@std/path": "jsr:@std/path@^1.0.9",
+		"@std/semver": "jsr:@std/semver@^1.0.5",
+		"@std/toml": "jsr:@std/toml@^1.0.5",
+		"@std/yaml": "jsr:@std/yaml@^1.0.6",
+		"zod": "npm:zod@^3.24.3"
+	},
+	"denoDeps": {
+		"entrypoint": "cmd.ts",
+		"output": "out.toml",
+		"dependencies": [{
+			"name": "heroicons",
+			"repository": "https://github.com/tailwindlabs/heroicons",
+			"version": "2.2.0",
+			"authors": ["Tailwind Labs, Inc."],
+			"license": "MIT License",
+			"licenseFile": "https://raw.githubusercontent.com/tailwindlabs/heroicons/refs/heads/master/LICENSE"
+		}]
 	}
 }
