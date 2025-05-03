@@ -15,11 +15,11 @@ const dependencies = [...cfg.dependencies, ...getDependencies(cfg.entrypoint)]
 const outputDependencies: Dependency[] = []
 
 for (const input of dependencies) {
+	const d = { ...input }
+
 	if (cfg.excludeDependencies.some((r) => r.test(d.name))) {
 		continue
 	}
-
-	const d = { ...input }
 
 	try {
 		const info = await (() => {
