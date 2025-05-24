@@ -1,6 +1,6 @@
 {
 	"name": "@nihility-io/deno-deps",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"exports": "./cmd.ts",
 	"lock": true,
 	"lint": {
@@ -22,8 +22,8 @@
 		"@std/jsonc": "jsr:@std/jsonc@^1.0.2",
 		"@std/path": "jsr:@std/path@^1.0.9",
 		"@std/semver": "jsr:@std/semver@^1.0.5",
-		"@std/toml": "jsr:@std/toml@^1.0.5",
+		"@std/toml": "jsr:@std/toml@^1.0.6",
 		"@std/yaml": "jsr:@std/yaml@^1.0.6",
-		"zod": "npm:zod@^3.24.3"
+		"zod": "npm:zod@^3.25.28"
 	}
 }

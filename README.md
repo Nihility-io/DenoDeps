@@ -10,13 +10,13 @@ Support output formats are: .json, .yml, .yaml, .toml.
 You can run deno-deps using command line options
 ```bash
 # A read only API token is required for Github in order to have a higher API quota.
-GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json
+DENO_DEPS_GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps --entrypoint main.ts --output deps.json
 ```
 or you can configuration your `deno.json` as follows:
 ```json
 {
   "name": "my-module",
-  "version": "1.100",
+  "version": "1.0.0",
   // ...
   "denoDeps": {
     "entrypoint": "main.ts",
@@ -27,7 +27,7 @@ or you can configuration your `deno.json` as follows:
 
 ```bash
 # A read only API token is required for Github in order to have a higher API quota.
-GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps
+DENO_DEPS_GITHUB_TOKEN="token" deno run -A jsr:@nihility-io/deno-deps
 ```
 
 In case you want to specify dependencies which are not picked up by deno-deps e.g. a font or icon library, you can add them manually via your `deno.json` as follows:

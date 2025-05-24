@@ -1,7 +1,7 @@
 import z from "zod"
 import { SourceInfo } from "../types.ts"
 
-const githubToken = Deno.env.get("GITHUB_TOKEN")
+const githubToken = Deno.env.get("DENO_DEPS_GITHUB_TOKEN") ?? Deno.env.get("GITHUB_TOKEN")
 
 const githubReg = /https:\/\/github.com\/([^\/]*)\/([^\/]*)(\.git)?/
 
