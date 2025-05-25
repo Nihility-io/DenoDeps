@@ -1,6 +1,6 @@
-import * as YAML from "@std/yaml"
-import * as TOML from "@std/toml"
 import * as path from "@std/path"
+import * as TOML from "@std/toml"
+import * as YAML from "@std/yaml"
 import { getConfig } from "./config.ts"
 import { trimPrefix } from "./helpers.ts"
 import { getDependencies } from "./parse.ts"
@@ -64,7 +64,7 @@ for (const input of dependencies) {
 }
 
 // Write JSON or YAML version of the dependency output
-const output = (() => {
+const output = (function (): string {
 	switch (path.extname(cfg.output)) {
 		case ".yml":
 		case ".yaml":

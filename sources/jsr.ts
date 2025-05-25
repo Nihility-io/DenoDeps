@@ -1,5 +1,5 @@
-import { SourceInfo } from "../types.ts"
 import z from "zod"
+import { SourceInfo } from "../types.ts"
 
 const packageModel = z.object({
 	scope: z.string(),
@@ -12,9 +12,9 @@ const packageModel = z.object({
  * Fetches package information from JSR.io
  * @param pkg Package name
  */
-export const getJSRInfo = (name: string): Promise<SourceInfo> => {
+export async function getJSRInfo(name: string): Promise<SourceInfo> {
 	const [scope, pkg] = name.split("/")
-	return fetch(`https://api.jsr.io/scopes/${scope.substring(1)}/packages/${pkg}`)
-		.then((x) => x.json())
-		.then(packageModel.parse)
+	const res = await fetch(`https://api.jsr.io/scopes/${scope.substring(1)}/packages/${pkg}`)
+	const data = await res.json()
+	return packageModel.parse(data)
 }

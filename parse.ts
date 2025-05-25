@@ -1,6 +1,6 @@
-import { Dependency } from "./types.ts"
-import { newerVersion } from "./helpers.ts"
 import { z } from "zod"
+import { newerVersion } from "./helpers.ts"
+import { Dependency } from "./types.ts"
 
 const infoJson = z.object({
 	packages: z.record(z.string()).transform((x) =>
@@ -29,7 +29,7 @@ const infoJson = z.object({
  * @param entrypoint Entrypoint script (e.g. main.ts)
  * @returns Parsed dependencies
  */
-export const getDependencies = (entrypoint: string): Dependency[] => {
+export function getDependencies(entrypoint: string): Dependency[] {
 	const denoDeps = infoJson.parse(JSON.parse(new TextDecoder("utf8")
 		.decode(new Deno.Command("deno", { args: ["info", "--json", entrypoint] }).outputSync().stdout)))
 

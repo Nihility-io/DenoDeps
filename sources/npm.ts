@@ -34,7 +34,8 @@ const packageModel = z.object({
  * @param pkg Package name
  * @param version Package version
  */
-export const getNpmInfo = (pkg: string, version: string): Promise<SourceInfo> =>
-	fetch(`https://registry.npmjs.com/${pkg}/${version}`)
-		.then((x) => x.json())
-		.then(packageModel.parse)
+export async function getNpmInfo(pkg: string, version: string): Promise<SourceInfo> {
+	const res = await fetch(`https://registry.npmjs.com/${pkg}/${version}`)
+	const data = await res.json()
+	return packageModel.parse(data)
+}

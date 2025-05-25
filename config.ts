@@ -1,13 +1,13 @@
 import { parseArgs } from "@std/cli"
-import * as JSONC from "@std/jsonc"
 import * as fs from "@std/fs"
+import * as JSONC from "@std/jsonc"
 import { Config, Dependency, JsonConfig } from "./types.ts"
 
 /**
  * Gets the configuration from command line and config file
  * @returns DenoDeps configuration
  */
-export const getConfig = async (): Promise<Config> => {
+export async function getConfig(): Promise<Config> {
 	let { entrypoint, output } = parseArgs(Deno.args, {
 		string: ["entrypoint", "output"],
 		default: { entrypoint: "", output: "" },
